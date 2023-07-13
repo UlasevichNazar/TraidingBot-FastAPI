@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+uvicorn = {extras = ["standart"], version = "*"}
+pydantic = "*"
+motor = "*"
+redis = "*"
+celery = "*"
+kafka = "*"
+pre-commit = "*"
+httpx = "*"
+async-to-sync = "*"
+
+[dev-packages]
+flake8 = "*"
+black = "*"
+
+[requires]
+python_version = "3.11"
+python_full_version = "3.11.4"
