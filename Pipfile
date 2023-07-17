@@ -5,20 +5,20 @@ name = "pypi"
 
 [packages]
 fastapi = "*"
-uvicorn = {extras = ["standart"], version = "*"}
+uvicorn = { extras = ["standart"], version = "*" }
 pydantic = "*"
 motor = "*"
 redis = "*"
 celery = "*"
-kafka = "*"
 pre-commit = "*"
 httpx = "*"
 async-to-sync = "*"
+aiokafka = "*"
+kafka-python = "*"
 
 [dev-packages]
 flake8 = "*"
 black = "*"
 
 [requires]
-python_version = "3.11"
-python_full_version = "3.11.4"
+python_version = "3.10"
