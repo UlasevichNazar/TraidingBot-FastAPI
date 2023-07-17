@@ -15,6 +15,7 @@ httpx = "*"
 async-to-sync = "*"
 aiokafka = "*"
 kafka-python = "*"
+pydantic-settings = "*"
 
 [dev-packages]
 flake8 = "*"
