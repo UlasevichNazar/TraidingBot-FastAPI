@@ -18,10 +18,10 @@ async def send_update_asset_info(message: dict):
 
 
 if __name__ == "__main__":
-    # asyncio.run(send_update_asset_info({"message": "bbbbbbbbb"}))
-
     loop = asyncio.get_event_loop()
     try:
-        loop.run_until_complete(send_update_asset_info({"message": "bbbbbbbbb"}))
+        loop.run_until_complete(
+            send_update_asset_info({"message": "bbbbbbbbb"})
+        )  # for testing
     finally:
         loop.close()
