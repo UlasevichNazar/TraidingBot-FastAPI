@@ -13,7 +13,9 @@ celery_app.conf.beat_schedule = {
     "parse": {
         "task": "app.parsing.tasks.parsing",
         "schedule": crontab(),
-        "args": (("AAPL", "LTC", "EOS", "LUNA", "PPC"),),
+        "args": (
+            ("AAPL", "LTC", "EOS", "LUNA", "PPC", "SOL", "TRX", "BSV", "BCH", "TUSD"),
+        ),
     }
 }
 

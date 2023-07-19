@@ -14,8 +14,8 @@ pre-commit = "*"
 httpx = "*"
 async-to-sync = "*"
 aiokafka = "*"
-kafka-python = "*"
 pydantic-settings = "*"
+kafka-python = "*"
 
 [dev-packages]
 flake8 = "*"
