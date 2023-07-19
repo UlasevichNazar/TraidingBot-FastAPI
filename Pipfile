@@ -16,6 +16,9 @@ async-to-sync = "*"
 aiokafka = "*"
 pydantic-settings = "*"
 kafka-python = "*"
+pytest = "*"
+mongomock-motor = "*"
+pytest-asyncio = "*"
 
 [dev-packages]
 flake8 = "*"

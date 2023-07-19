@@ -34,12 +34,16 @@ def parsing(assets_collection: List[str]):
             upsert.delay(file["Global Quote"])
 
     time.sleep(5)
-    # values = ([{'01. symbol': 'AAPL', '05. price': 193.73}, {'01. symbol': 'LTC', '05. price': 34.35},
-    #            {'01. symbol': 'EOS', '05. price': 18.62}, {'01. symbol': 'LUNA', '05. price': 8.84},
-    #            {'01. symbol': 'PPC', '05. price': 24.49},
-    #            {'01. symbol': 'BTC', '05. price': 12.00}])
+    # values = [
+    #     {"01. symbol": "AAPL", "05. price": 193.73},
+    #     {"01. symbol": "LTC", "05. price": 34.35},
+    #     {"01. symbol": "EOS", "05. price": 18.62},
+    #     {"01. symbol": "LUNA", "05. price": 8.84},
+    #     {"01. symbol": "PPC", "05. price": 24.49},
+    #     {"01. symbol": "BTC", "05. price": 12.00},
+    # ]
     # for file in values:
-    #     upsert.delay(file) # for testing (used when request limit is exceeded)
+    #     upsert.delay(file)  # for testing (used when request limit is exceeded)
 
 
 @celery_app.task()
