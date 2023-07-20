@@ -1,3 +1,5 @@
+import time
+
 from celery.app import Celery
 from celery.schedules import crontab
 
@@ -22,4 +24,5 @@ celery_app.conf.beat_schedule = {
 celery_app.conf.timezone = "UTC"
 
 if __name__ == "__main__":
+    time.sleep(10)
     celery_app.start()

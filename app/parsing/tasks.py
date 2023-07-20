@@ -16,7 +16,7 @@ logger = get_task_logger(__name__)
 
 async def get_response(url: str):
     async with httpx.AsyncClient() as client:
-        response = await client.get(url)
+        response = await client.get(url, timeout=20)
     return response
 
 
@@ -33,7 +33,7 @@ def parsing(assets_collection: List[str]):
             logger.info(file)
             upsert.delay(file["Global Quote"])
 
-    time.sleep(5)
+    time.sleep(20)
     # values = [
     #     {"01. symbol": "AAPL", "05. price": 193.73},
     #     {"01. symbol": "LTC", "05. price": 34.35},
