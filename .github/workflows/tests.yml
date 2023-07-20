@@ -21,6 +21,7 @@ jobs:
           echo "${{ secrets.ENV_FILE_FAST_API }}" > .env
       - name: Build Docker container
         run: |
+          docker network create fastapi_kafka
           docker-compose up -d --build
       - name: Pytests
         run: docker-compose exec -T fastapi pytest
