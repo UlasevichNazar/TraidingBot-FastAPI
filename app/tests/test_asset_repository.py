@@ -22,7 +22,10 @@ class TestAssetRepository:
         assert assets[2]["current_price"] == 250.00
 
     @pytest.mark.asyncio
-    async def test_update_asset_price_with_non_exiting_asset(self, asset_repo):
+    async def test_update_asset_price_with_non_exiting_asset(self, asset_repo, mocker):
+        mocker.patch(
+            "app.parsing.repositories.parser.send_update_asset_info", return_value=None
+        )
         # Act
         await asset_repo.update_asset_price(
             {"name": "asset1"}, {"current_price": 120.00}
@@ -33,7 +36,10 @@ class TestAssetRepository:
         assert assets[0]["name"] == "asset1"
 
     @pytest.mark.asyncio
-    async def test_update_asset_price(self, asset_repo):
+    async def test_update_asset_price(self, asset_repo, mocker):
+        mocker.patch(
+            "app.parsing.repositories.parser.send_update_asset_info", return_value=None
+        )
         # Arrange
         await asset_repo.update_asset_price(
             {"name": "asset1"}, {"current_price": 100.00}

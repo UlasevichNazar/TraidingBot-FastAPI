@@ -22,10 +22,12 @@ class TestService:
         assert result == []
 
     @pytest.mark.asyncio
-    async def test_update_asset_price(self, service):
+    async def test_update_asset_price(self, service, mocker):
         # Arrange
         file = {"01. symbol": "AAPL", "05. price": 100.00}
-
+        mocker.patch(
+            "app.parsing.repositories.parser.send_update_asset_info", return_value=None
+        )
         # Act
         await service.update_price(file)
         assets = await service.get_assets()
@@ -39,7 +41,7 @@ class TestService:
         assert asset["current_price"] == file["05. price"]
 
     @pytest.mark.asyncio
-    async def test_update_price_raises_error_when_file_missing_fields(self):
+    async def test_update_price_raises_error_when_file_missing_fields(self, mocker):
         # Arrange
         repository = AssetRepository(
             collection=[{"name": "AAPL", "current_price": 100.00}]
@@ -49,11 +51,15 @@ class TestService:
 
         # Act & Assert
         with pytest.raises(KeyError):
+            mocker.patch(
+                "app.parsing.repositories.parser.send_update_asset_info",
+                return_value=None,
+            )
             await asset_service.update_price(file)
 
     @pytest.mark.asyncio
     async def test_update_price_raises_error_when_filter_does_not_match_any_assets(
-        self,
+        self, mocker
     ):
         # Arrange
         repository = AssetRepository(
@@ -64,4 +70,8 @@ class TestService:
 
         # Act & Assert
         with pytest.raises(AttributeError):
+            mocker.patch(
+                "app.parsing.repositories.parser.send_update_asset_info",
+                return_value=None,
+            )
             await asset_service.update_price(file)
