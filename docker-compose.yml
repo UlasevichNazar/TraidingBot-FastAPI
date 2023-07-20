@@ -57,6 +57,7 @@ services:
 
   celery:
     build:
+      context: .
       dockerfile: Dockerfile
     entrypoint: '/celery-entrypoint.sh'
     env_file:
