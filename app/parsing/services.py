@@ -1,4 +1,5 @@
 from app.parsing.repositories.parser import AssetRepository
+from config.config import setting
 
 
 class AssetService:
@@ -9,6 +10,9 @@ class AssetService:
         return await self.repository.get_assets()
 
     async def update_price(self, file: dict):
-        filter = {"name": file["01. symbol"]}
-        file = {"name": file["01. symbol"], "current_price": file["05. price"]}
+        filter = {"name": file[f"{setting.symbol}"]}
+        file = {
+            "name": file[f"{setting.symbol}"],
+            "current_price": file[f"{setting.price}"],
+        }
         return await self.repository.update_asset_price(file, filter)

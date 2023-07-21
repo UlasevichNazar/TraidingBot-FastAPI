@@ -24,23 +24,23 @@ async def get_response(url: str):
 def parsing(assets_collection: List[str]):
     api_key = setting.API_KEY
     for asset in assets_collection:
-        url = f"{setting.URL}symbol={asset}&apikey={api_key}"
+        url = f"{setting.URL}&symbol={asset}&apikey={api_key}"
         loop = asyncio.get_event_loop()
         response = loop.run_until_complete(get_response(url))
 
         if response.status_code == 200:
             file = response.json()
             logger.info(file)
-            upsert.delay(file["Global Quote"])
+            upsert.delay(file[f"{setting.global_quote}"])
 
     time.sleep(20)
     # values = [
-    #     {"01. symbol": "AAPL", "05. price": 193.73},
-    #     {"01. symbol": "LTC", "05. price": 34.35},
-    #     {"01. symbol": "EOS", "05. price": 18.62},
-    #     {"01. symbol": "LUNA", "05. price": 8.84},
-    #     {"01. symbol": "PPC", "05. price": 24.49},
-    #     {"01. symbol": "BTC", "05. price": 12.00},
+    #     {f"{setting.symbol}": "AAPL", f"{setting.price}": 193.73},
+    #     {f"{setting.symbol}": "LTC", f"{setting.price}": 34.35},
+    #     {f"{setting.symbol}": "EOS", f"{setting.price}": 18.62},
+    #     {f"{setting.symbol}": "LUNA", f"{setting.price}": 8.84},
+    #     {f"{setting.symbol}": "PPC", f"{setting.price}": 24.49},
+    #     {f"{setting.symbol}": "BTC", f"{setting.price}": 12.00},
     # ]
     # for file in values:
     #     upsert.delay(file)  # for testing (used when request limit is exceeded)

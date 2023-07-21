@@ -34,6 +34,10 @@ class Setting(BaseSettings):
     CELERY_TASK_SERIALIZER: str
     CELERY_RESULT_SERIALIZER: str
 
+    symbol: str
+    price: str
+    global_quote: str
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
