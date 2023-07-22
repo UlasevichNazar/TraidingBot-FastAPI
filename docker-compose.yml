@@ -1,0 +1,85 @@
+version: "3.11"
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fast_api
+    entrypoint: '/fastapi-entrypoint.sh'
+    ports:
+      - "${FASTAPI_PORT}:8080"
+    volumes:
+      - .:/app
+    env_file:
+      - .env/
+    depends_on:
+      - mongo
+      - kafka
+    networks:
+      - fastapi_kafka
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    ports:
+      - "${MONGO_PORT}:27017"
+    env_file:
+      - .env/
+    volumes:
+      - ./data:/data/db
+    networks:
+      - fastapi_kafka
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    env_file:
+      - .env/
+    expose:
+      - ${ZOOKEEPER_PORT}
+    ports:
+      - ${ZOOKEEPER_PORT}:${ZOOKEEPER_PORT}
+    networks:
+      - fastapi_kafka
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    expose:
+      - ${KAFKA_PORTS}
+    ports:
+      - ${KAFKA_PORTS}:${KAFKA_PORTS}
+    env_file:
+      - .env/
+    depends_on:
+      - zookeeper
+    networks:
+      - fastapi_kafka
+
+  celery:
+    build:
+      dockerfile: Dockerfile
+    entrypoint: '/celery-entrypoint.sh'
+    env_file:
+      - .env/
+    volumes:
+      - .:/app
+    depends_on:
+      - kafka
+      - fastapi
+      - redis2
+    networks:
+      - fastapi_kafka
+
+  redis2:
+    image: redis:alpine
+    env_file:
+      - .env/
+    restart: always
+    networks:
+      - fastapi_kafka
+
+
+
+networks:
+  fastapi_kafka:
+    external: true

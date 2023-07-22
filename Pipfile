@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+uvicorn = { extras = ["standart"], version = "*" }
+pydantic = "*"
+motor = "*"
+redis = "*"
+celery = "*"
+pre-commit = "*"
+httpx = "*"
+async-to-sync = "*"
+aiokafka = "*"
+pydantic-settings = "*"
+kafka-python = "*"
+pytest = "*"
+mongomock-motor = "*"
+pytest-asyncio = "*"
+
+[dev-packages]
+flake8 = "*"
+black = "*"
+
+[requires]
+python_version = "3.10"
