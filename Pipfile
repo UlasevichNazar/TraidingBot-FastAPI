@@ -19,6 +19,7 @@ kafka-python = "*"
 pytest = "*"
 mongomock-motor = "*"
 pytest-asyncio = "*"
+pytest-mock = "*"
 
 [dev-packages]
 flake8 = "*"
