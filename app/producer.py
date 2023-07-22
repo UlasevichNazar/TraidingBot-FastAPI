@@ -14,7 +14,7 @@ async def send_update_asset_info(message: dict):
         await producer.send_and_wait("Asset", json.dumps(message).encode("utf-8"))
         logging.info(f"Message sent {message}")
     except Exception as e:
-        print(e)
+        logging.info(f"Error - {e}")
     finally:
         await producer.stop()
 
